@@ -1,0 +1,10 @@
+.app.dark {
+  --bg-color: #222;
+
+  --primary-color: #eee;
+  --secondary-color: #ececec;
+
+  ::selection {
+    background-color: #f81ce5;
+  }
+}
