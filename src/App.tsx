@@ -4,11 +4,10 @@ import clsx from 'clsx';
 
 import { Auth } from './pages/Auth';
 import { Main } from './pages/Main';
-
-import { useTheme } from './providers/Theme';
+import { useThemeContext } from './context/Theme';
 
 const App = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeContext();
 
   return (
     <div className={clsx('app', theme)}>
