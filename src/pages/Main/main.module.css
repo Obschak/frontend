@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.topWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  font-weight: normal;
+}
+
+.buttonUntstyled {
+  border: 0;
+  background-color: inherit;
+}
+
+.profileButton {
+  composes: buttonUntstyled;
+}
+
+.createButton {
+  composes: buttonUntstyled;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
