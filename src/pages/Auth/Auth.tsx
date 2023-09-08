@@ -1,16 +1,14 @@
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import axios from 'axios';
 
 import { useAppDispatch } from '../../store/hooks';
-import { setUserInfo, setUserToken } from './authSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { logout, setUserInfo, setUserToken } from './authSlice';
 
 import styles from './style.module.scss';
 
 export const USER_TOKEN_KEY = 'user_token';
-const localToken = localStorage.getItem(USER_TOKEN_KEY);
 
 interface ResponseValue {
   access_token: string;
@@ -24,11 +22,8 @@ interface UserInfo {
 
 const Auth = () => {
   const dispatch = useAppDispatch();
-  const userToken =
-    useSelector((state: RootState) => state.auth.user_token) || localToken;
-  const { name, email, picture } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const userToken = useSelector(({ auth }) => auth.userToken);
+  const { name, email, picture } = useSelector(({ auth }) => auth);
 
   const login = useGoogleLogin({
     onSuccess: (res: ResponseValue) => {
@@ -43,30 +38,40 @@ const Auth = () => {
   const logOut = () => {
     googleLogout();
     localStorage.removeItem(USER_TOKEN_KEY);
-    dispatch(setUserInfo(null));
+    dispatch(logout());
+  };
+
+  const getUserInfo = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userToken}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            Accept: 'application/json',
+          },
+        },
+      );
+
+      const { name, email, picture }: UserInfo = data;
+
+      dispatch(setUserInfo({ name, email, picture }));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
-    if (userToken) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userToken}`,
-          {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-              Accept: 'application/json',
-            },
-          },
-        )
-        .then((res) => {
-          const { name, email, picture }: UserInfo = res.data;
+    const localToken = localStorage.getItem(USER_TOKEN_KEY);
 
-          dispatch(setUserInfo({ name, email, picture }));
-          dispatch(setUserToken(localToken));
-        })
-        .catch((err) => {
-          throw new Error(err);
-        });
+    if (localToken) {
+      dispatch(setUserToken(localToken));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userToken) {
+      getUserInfo();
     }
   }, [userToken]);
 

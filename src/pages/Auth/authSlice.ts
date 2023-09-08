@@ -1,34 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface AuthState {
+  name: string;
+  email: string;
+  picture: string;
+  userToken: null | string;
+}
+
+interface UserInfoPayload {
+  name: string;
+  email: string;
+  picture: string;
+}
+
+const initialState: AuthState = {
   name: '',
   email: '',
   picture: '',
-  user_token: null,
+  userToken: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUserToken(state, action) {
-      state.user_token = action.payload;
+    setUserToken(state, action: PayloadAction<string>) {
+      state.userToken = action.payload;
     },
-    setUserInfo(state, action) {
-      if (!action.payload) {
-        state.name = '';
-        state.email = '';
-        state.picture = '';
-        state.user_token = null;
-      } else {
-        state.name = action.payload.name;
-        state.email = action.payload.email;
-        state.picture = action.payload.picture;
-      }
+    setUserInfo(state, action: PayloadAction<UserInfoPayload>) {
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.picture = action.payload.picture;
+    },
+    logout(state) {
+      state.name = '';
+      state.email = '';
+      state.picture = '';
+      state.userToken = null;
     },
   },
 });
 
-export const { setUserToken, setUserInfo } = authSlice.actions;
+export const { setUserToken, setUserInfo, logout } = authSlice.actions;
 
 export default authSlice.reducer;

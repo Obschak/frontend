@@ -10,11 +10,13 @@ import { Provider } from 'react-redux';
 import './assets/styles/index.scss';
 import ThemeContextProvider from './context/Theme.tsx';
 
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <HashRouter>
     <Provider store={store}>
       <ThemeContextProvider>
-        <GoogleOAuthProvider clientId="493125079778-45igjn7jp3rtik2oc5pkv6rk2btp24tv.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={CLIENT_ID}>
           <App />
         </GoogleOAuthProvider>
       </ThemeContextProvider>
