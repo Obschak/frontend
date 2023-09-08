@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useAppDispatch } from '../../store/hooks';
 import { logout, setUserInfo, setUserToken } from './authSlice';
 
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
 
 export const USER_TOKEN_KEY = 'user_token';
 

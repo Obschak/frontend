@@ -1,24 +1,25 @@
-import Avatar from '../../components/Avatar/Avatar';
-
-import styles from './main.module.css';
-
+import { Link } from 'react-router-dom';
 import { PlusIcon } from '@radix-ui/react-icons';
+
+import Avatar from '../../components/Avatar';
+
+import styles from './styles.module.scss';
 
 const MainPage = () => {
   return (
     <div className={styles.main}>
       <div className={styles.topWrapper}>
         <h1 className={styles.heading}>Общаки</h1>
-        <button className={styles.profileButton}>
-          <Avatar size={'medium'} />
-        </button>
+        <Link to="/profile">
+          <div className={styles.profileButton}>
+            <Avatar size={'medium'} />
+          </div>
+        </Link>
       </div>
-      <button className={styles.createButton}>
-        <div>
-          <PlusIcon width="80" height="80" />
-          <p>Создать общак</p>
-        </div>
-      </button>
+      <div className={styles.createButton}>
+        <PlusIcon width="80" height="80" />
+        <p>Создать общак</p>
+      </div>
     </div>
   );
 };

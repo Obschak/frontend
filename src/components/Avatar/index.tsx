@@ -1,7 +1,7 @@
 import * as AvatarRadix from '@radix-ui/react-avatar';
 import clsx from 'clsx';
 
-import styles from './avatar.module.css';
+import styles from './styles.module.scss';
 
 import avatar from '../../assets/images/avatar.jpg';
 

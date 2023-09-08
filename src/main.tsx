@@ -1,14 +1,13 @@
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import App from './App.tsx';
-
 import { store } from './store/index.ts';
-import { Provider } from 'react-redux';
-
-import './assets/styles/index.scss';
 import ThemeContextProvider from './context/Theme.tsx';
+
+import './styles/index.scss';
 
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 

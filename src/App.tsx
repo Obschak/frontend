@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { Auth } from './pages/Auth';
 import { Main } from './pages/Main';
 import { useThemeContext } from './context/Theme';
+import { Profile } from './pages/Profile';
 
 const App = () => {
   const { theme, toggleTheme } = useThemeContext();
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/auth" element={<Auth />} />
           <Route path="/" element={<Main />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </Suspense>
