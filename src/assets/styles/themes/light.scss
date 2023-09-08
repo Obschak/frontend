@@ -1,8 +1,8 @@
 .app.light {
-  $bg-color: #eee;
+  --bg-color: #eee;
 
-  $primary-color: #222;
-  $secondary-color: #1b1b1b;
+  --primary-color: #222;
+  --secondary-color: #1b1b1b;
 
   ::selection {
     background-color: #79ffe1;

@@ -11,9 +11,9 @@ const App = () => {
 
   return (
     <div className={clsx('app', theme)}>
-      {/* <button onClick={toggleTheme}>Toggle theme</button>
+      <button onClick={toggleTheme}>Toggle theme</button>
       <Link to="/">Go main</Link>
-      <Link to="/auth">Go auth</Link> */}
+      <Link to="/auth">Go auth</Link>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/auth" element={<Auth />} />
