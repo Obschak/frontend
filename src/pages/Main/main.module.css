@@ -25,6 +25,7 @@
 
 .createButton {
   composes: buttonUntstyled;
+
   display: flex;
   position: absolute;
   top: 50%;

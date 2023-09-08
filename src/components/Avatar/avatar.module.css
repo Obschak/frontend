@@ -10,3 +10,18 @@
   object-fit: cover;
   border-radius: inherit;
 }
+
+.small {
+  width: 30px;
+  height: 30px;
+}
+
+.medium {
+  width: 60px;
+  height: 60px;
+}
+
+.large {
+  width: 80px;
+  height: 80px;
+}

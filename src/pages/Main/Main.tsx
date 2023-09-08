@@ -10,7 +10,7 @@ const MainPage = () => {
       <div className={styles.topWrapper}>
         <h1 className={styles.heading}>Общаки</h1>
         <button className={styles.profileButton}>
-          <Avatar avatarSize={60} />
+          <Avatar size={'medium'} />
         </button>
       </div>
       <button className={styles.createButton}>
