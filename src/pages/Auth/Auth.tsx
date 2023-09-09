@@ -1,18 +1,17 @@
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useGoogleLogin, googleLogout } from '@react-oauth/google';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import {
+  GoogleLogin,
+  googleLogout,
+  CredentialResponse,
+} from '@react-oauth/google';
+import jwtDecode from 'jwt-decode';
 
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logout, setUserInfo, setUserToken } from './authSlice';
 
 import styles from './styles.module.scss';
 
 export const USER_TOKEN_KEY = 'user_token';
-
-interface ResponseValue {
-  access_token: string;
-}
 
 interface UserInfo {
   email: string;
@@ -20,65 +19,75 @@ interface UserInfo {
   picture: string;
 }
 
-const Auth = () => {
+const Auth = (): React.JSX.Element => {
   const dispatch = useAppDispatch();
-  const userToken = useSelector(({ auth }) => auth.userToken);
-  const { name, email, picture } = useSelector(({ auth }) => auth);
+  const userToken = useAppSelector(({ auth }) => auth.userToken);
+  const { name, email, picture } = useAppSelector(({ auth }) => auth);
 
-  const login = useGoogleLogin({
-    onSuccess: (res: ResponseValue) => {
-      localStorage.setItem(USER_TOKEN_KEY, res.access_token);
-      dispatch(setUserToken(res.access_token));
-    },
-    onError: (error) => {
-      throw new Error(`Login Failed: ${error}`);
-    },
-  });
+  const googleAuth = async (tokenResponse: CredentialResponse | null) => {
+    try {
+      if (tokenResponse) {
+        const { name, email, picture }: UserInfo = jwtDecode(
+          tokenResponse.credential || '',
+        );
 
-  const logOut = () => {
+        dispatch(setUserInfo({ name, email, picture }));
+
+        localStorage.setItem(USER_TOKEN_KEY, tokenResponse.credential || '');
+        dispatch(setUserToken(tokenResponse.credential || ''));
+      } else {
+        const credential = localStorage.getItem(USER_TOKEN_KEY);
+        const { name, email, picture }: UserInfo = jwtDecode(credential || '');
+
+        dispatch(setUserInfo({ name, email, picture }));
+
+        localStorage.setItem(USER_TOKEN_KEY, credential || '');
+        dispatch(setUserToken(credential || ''));
+      }
+    } catch (err) {
+      console.log('Login failed: ', err);
+    }
+  };
+
+  const logOutHandle = () => {
     googleLogout();
     localStorage.removeItem(USER_TOKEN_KEY);
     dispatch(logout());
   };
 
-  const getUserInfo = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userToken}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-            Accept: 'application/json',
-          },
-        },
-      );
+  // const getUserInfo = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userToken}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${userToken}`,
+  //           Accept: 'application/json',
+  //         },
+  //       },
+  //     );
 
-      const { name, email, picture }: UserInfo = data;
+  //     const { name, email, picture }: UserInfo = data;
 
-      dispatch(setUserInfo({ name, email, picture }));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //     dispatch(setUserInfo({ name, email, picture }));
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (userToken) {
+  //     getUserInfo();
+  //   }
+  // }, [userToken]);
 
   useEffect(() => {
-    const localToken = localStorage.getItem(USER_TOKEN_KEY);
-
-    if (localToken) {
-      dispatch(setUserToken(localToken));
-    }
+    googleAuth(null);
   }, []);
-
-  useEffect(() => {
-    if (userToken) {
-      getUserInfo();
-    }
-  }, [userToken]);
 
   return (
     <div className={styles.auth}>
-      <h2>React Google Login</h2>
-      {name ? (
+      {userToken ? (
         <div>
           <img src={picture} alt="user image" />
           <h3>User Logged in</h3>
@@ -86,10 +95,16 @@ const Auth = () => {
           <p>Email Address: {email}</p>
           <br />
           <br />
-          <button onClick={logOut}>Log out</button>
+          <button onClick={logOutHandle}>Log out</button>
         </div>
       ) : (
-        <button onClick={() => login()}>Sign in with Google 🚀 </button>
+        <GoogleLogin
+          logo_alignment="center"
+          text="signin"
+          theme="outline"
+          width="350px"
+          onSuccess={googleAuth}
+        />
       )}
     </div>
   );
