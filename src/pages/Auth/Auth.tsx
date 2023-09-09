@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import {
   GoogleLogin,
   googleLogout,
@@ -8,42 +7,27 @@ import jwtDecode from 'jwt-decode';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logout, setUserInfo, setUserToken } from './authSlice';
+import { UserInfo } from '../../types/user';
 
 import styles from './styles.module.scss';
 
 export const USER_TOKEN_KEY = 'user_token';
 
-interface UserInfo {
-  email: string;
-  name: string;
-  picture: string;
-}
-
-const Auth = (): React.JSX.Element => {
+const Auth = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const userToken = useAppSelector(({ auth }) => auth.userToken);
-  const { name, email, picture } = useAppSelector(({ auth }) => auth);
+  const { name, email, picture, userToken } = useAppSelector(
+    ({ auth }) => auth,
+  );
 
-  const googleAuth = async (tokenResponse: CredentialResponse | null) => {
+  const googleAuth = async (tokenResponse: CredentialResponse) => {
     try {
-      if (tokenResponse) {
-        const { name, email, picture }: UserInfo = jwtDecode(
-          tokenResponse.credential || '',
-        );
+      const userToken = tokenResponse.credential || '';
+      const { name, email, picture }: UserInfo = jwtDecode(userToken);
 
-        dispatch(setUserInfo({ name, email, picture }));
+      dispatch(setUserInfo({ name, email, picture }));
 
-        localStorage.setItem(USER_TOKEN_KEY, tokenResponse.credential || '');
-        dispatch(setUserToken(tokenResponse.credential || ''));
-      } else {
-        const credential = localStorage.getItem(USER_TOKEN_KEY);
-        const { name, email, picture }: UserInfo = jwtDecode(credential || '');
-
-        dispatch(setUserInfo({ name, email, picture }));
-
-        localStorage.setItem(USER_TOKEN_KEY, credential || '');
-        dispatch(setUserToken(credential || ''));
-      }
+      localStorage.setItem(USER_TOKEN_KEY, userToken);
+      dispatch(setUserToken(userToken));
     } catch (err) {
       console.log('Login failed: ', err);
     }
@@ -74,16 +58,6 @@ const Auth = (): React.JSX.Element => {
   //     console.log(e);
   //   }
   // };
-
-  // useEffect(() => {
-  //   if (userToken) {
-  //     getUserInfo();
-  //   }
-  // }, [userToken]);
-
-  useEffect(() => {
-    googleAuth(null);
-  }, []);
 
   return (
     <div className={styles.auth}>
