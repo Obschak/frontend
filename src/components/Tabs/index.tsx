@@ -20,12 +20,7 @@ export const Tabs = () => (
         <label className={styles.label} htmlFor="tel">
           Номер телефона
         </label>
-        <input
-          className={styles.input}
-          id="tel"
-          type="number"
-          defaultValue=""
-        />
+        <input className={styles.input} id="tel" type="tel" defaultValue="" />
       </fieldset>
       <fieldset className={styles.fieldset}>
         <label className={styles.label} htmlFor="bank">
@@ -51,7 +46,7 @@ export const Tabs = () => (
         <label className={styles.label} htmlFor="cardNumber">
           Номер карты
         </label>
-        <input className={styles.input} id="cardNumber" type="number" />
+        <input className={styles.input} id="cardNumber" type="text" />
       </fieldset>
       <div
         style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
