@@ -11,6 +11,7 @@ import { UserInfo } from './types/user';
 import { USER_TOKEN_KEY } from './pages/Auth/Auth';
 import { useAppDispatch } from './store/hooks';
 import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
+import { CreateGroup } from './pages/CreateGroup';
 
 const App = () => {
   const { theme, toggleTheme } = useThemeContext();
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/auth" element={<Auth />} />
           <Route path="/" element={<Main />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-group" element={<CreateGroup />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </Suspense>

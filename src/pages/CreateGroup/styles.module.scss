@@ -1,0 +1,33 @@
+.createGroup {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.input {
+  width: 240px;
+  height: 26px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.createButton {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  max-width: 160px;
+  padding: 10px 0 10px;
+  margin-bottom: 100px;
+}
+
+.heading {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
