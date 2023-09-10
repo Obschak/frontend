@@ -28,3 +28,14 @@
 .tabsWrapper {
   margin: 40px auto 0;
 }
+
+.main {
+  flex-grow: 1;
+}
+
+.themeButton {
+  padding: 20px;
+  border: 0;
+  border-radius: 4px;
+  background-color: white;
+}

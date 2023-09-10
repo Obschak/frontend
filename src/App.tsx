@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import clsx from 'clsx';
 import jwtDecode from 'jwt-decode';
 
@@ -14,7 +14,7 @@ import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
 import { CreateGroup } from './pages/CreateGroup';
 
 const App = () => {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,9 +31,6 @@ const App = () => {
 
   return (
     <div className={clsx('app', theme)}>
-      <button onClick={toggleTheme}>Toggle theme</button>
-      <Link to="/">Go main</Link>
-      <Link to="/auth">Go auth</Link>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/auth" element={<Auth />} />
