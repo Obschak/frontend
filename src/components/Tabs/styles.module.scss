@@ -72,12 +72,18 @@
 }
 
 .input {
+  border: 1px solid grey;
   flex: 1 0 auto;
   padding: 0 10px;
   font-size: 15px;
   line-height: 1;
   height: 35px;
   border-radius: 6px;
+  outline: none;
+}
+
+.input:focus {
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .button {

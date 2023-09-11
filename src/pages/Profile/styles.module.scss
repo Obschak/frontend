@@ -34,8 +34,15 @@
 }
 
 .themeButton {
-  padding: 20px;
+  margin: 0;
+  padding: 0;
   border: 0;
-  border-radius: 4px;
-  background-color: white;
+  background-color: inherit;
+  width: auto;
+  cursor: pointer;
+}
+
+.topWrapper {
+  display: flex;
+  flex-direction: row;
 }

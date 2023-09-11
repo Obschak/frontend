@@ -2,16 +2,25 @@ import { Link } from 'react-router-dom';
 
 import { Tabs } from '../../components/Tabs';
 import Avatar from './../../components/Avatar';
-
-import styles from './styles.module.scss';
 import { useThemeContext } from '../../context/Theme';
 
+import sunLogo from '../../assets/images/sun.svg';
+import moonLogo from '../../assets/images/moon.svg';
+
+import styles from './styles.module.scss';
+
 const Profile = () => {
-  const { toggleTheme } = useThemeContext();
+  const { toggleTheme, theme } = useThemeContext();
+  const themeLogo = theme === 'light' ? moonLogo : sunLogo;
   return (
     <div className={styles.profile}>
       <main className={styles.main}>
-        <h1>Мой профиль</h1>
+        <div className={styles.topWrapper}>
+          <h1>Мой профиль</h1>
+          <button className={styles.themeButton} onClick={toggleTheme}>
+            <img src={themeLogo} alt="themeLogo" width="40px" height="40px" />
+          </button>
+        </div>
         <div className={styles.topWrapper}>
           <Avatar size={'large'} />
           <Link to="/auth">
@@ -24,9 +33,6 @@ const Profile = () => {
           <Tabs />
         </div>
       </main>
-      <button className={styles.themeButton} onClick={toggleTheme}>
-        Поменять тему
-      </button>
     </div>
   );
 };
