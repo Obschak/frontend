@@ -12,6 +12,7 @@ import { USER_TOKEN_KEY } from './pages/Auth/Auth';
 import { useAppDispatch } from './store/hooks';
 import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
 import { CreateGroup } from './pages/CreateGroup';
+import Modal from './components/Modal';
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -34,10 +35,19 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/auth" element={<Auth />} />
-          <Route path="/" element={<Main />} />
+          <Route path="/*" element={<Main />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/create-group" element={<CreateGroup />} />
           <Route path="*" element={<div>404</div>} />
+        </Routes>
+        <Routes>
+          <Route
+            path="/create-group"
+            element={
+              <Modal closePath="/">
+                <CreateGroup />
+              </Modal>
+            }
+          />
         </Routes>
       </Suspense>
     </div>
