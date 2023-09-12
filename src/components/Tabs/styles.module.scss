@@ -1,6 +1,8 @@
 @import '@radix-ui/colors/green.css';
 
 .tabsRoot {
+  border: 0;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   min-width: 320px;

@@ -16,7 +16,7 @@ const Profile = () => {
     <div className={styles.profile}>
       <main className={styles.main}>
         <div className={styles.topWrapper}>
-          <h1>Мой профиль</h1>
+          <h1 className={styles.heading}>Мой профиль</h1>
           <button className={styles.themeButton} onClick={toggleTheme}>
             <img src={themeLogo} alt="themeLogo" width="40px" height="40px" />
           </button>
