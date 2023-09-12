@@ -10,11 +10,14 @@ import { logout, setUserInfo, setUserToken } from './authSlice';
 import { UserInfo } from '../../types/user';
 
 import styles from './styles.module.scss';
+import { Navigate } from 'react-router-dom';
 
 export const USER_TOKEN_KEY = 'user_token';
 
 const Auth = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const token = localStorage.getItem(USER_TOKEN_KEY);
+
   const { name, email, picture, userToken } = useAppSelector(
     ({ auth }) => auth,
   );
@@ -38,6 +41,10 @@ const Auth = (): JSX.Element => {
     localStorage.removeItem(USER_TOKEN_KEY);
     dispatch(logout());
   };
+
+  if (token) {
+    return <Navigate to="/" />;
+  }
 
   // const getUserInfo = async () => {
   //   try {

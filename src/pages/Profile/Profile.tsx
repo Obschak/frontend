@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import { Tabs } from '../../components/Tabs';
 import Avatar from './../../components/Avatar';
 import { useThemeContext } from '../../context/Theme';
@@ -8,10 +6,30 @@ import sunLogo from '../../assets/images/sun.svg';
 import moonLogo from '../../assets/images/moon.svg';
 
 import styles from './styles.module.scss';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { googleLogout } from '@react-oauth/google';
+import { logout } from '../Auth/authSlice';
+import { USER_TOKEN_KEY } from '../Auth/Auth';
+import { Navigate } from 'react-router-dom';
 
 const Profile = () => {
+  const userToken = localStorage.getItem(USER_TOKEN_KEY);
+  const dispatch = useAppDispatch();
   const { toggleTheme, theme } = useThemeContext();
+
+  const { picture, name } = useAppSelector(({ auth }) => auth);
   const themeLogo = theme === 'light' ? moonLogo : sunLogo;
+
+  const logOutHandle = () => {
+    googleLogout();
+    localStorage.removeItem(USER_TOKEN_KEY);
+    dispatch(logout());
+  };
+
+  if (!userToken) {
+    return <Navigate to="/auth" />;
+  }
+
   return (
     <div className={styles.profile}>
       <main className={styles.main}>
@@ -22,12 +40,13 @@ const Profile = () => {
           </button>
         </div>
         <div className={styles.topWrapper}>
-          <Avatar size={'large'} />
-          <Link to="/auth">
-            <div className={styles.profileButton}>
-              <h2 className={styles.userName}>Бекиров Шабут</h2>
-            </div>
-          </Link>
+          <Avatar size={'large'} image={picture} />
+          <div className={styles.buttonWrapper}>
+            <h2 className={styles.userName}>{name}</h2>
+            <button className={styles.logoutButton} onClick={logOutHandle}>
+              Выйти
+            </button>
+          </div>
         </div>
         <div className={styles.tabsWrapper}>
           <Tabs />
