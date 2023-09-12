@@ -1,0 +1,48 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto 0;
+}
+
+.topWrapper {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileButton {
+  padding: 4px 20px 4px 20px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.userName {
+  text-decoration: none;
+  color: black;
+}
+
+.tabsWrapper {
+  margin: 40px auto 0;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.themeButton {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+  width: auto;
+  cursor: pointer;
+}
+
+.topWrapper {
+  display: flex;
+  flex-direction: row;
+}

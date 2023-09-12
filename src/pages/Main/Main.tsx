@@ -19,10 +19,10 @@ const MainPage = () => {
           </div>
         </Link>
       </div>
-      <div className={styles.createButton}>
+      <Link to="/create-group" className={styles.createButton}>
         <PlusIcon width="80" height="80" />
         <p>Создать общак</p>
-      </div>
+      </Link>
     </div>
   );
 };
