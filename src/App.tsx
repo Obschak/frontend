@@ -11,6 +11,7 @@ import { UserInfo } from './types/user';
 import { USER_TOKEN_KEY } from './pages/Auth/Auth';
 import { useAppDispatch } from './store/hooks';
 import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
+import { AuthGuard } from './components/AuthGuard';
 
 const App = () => {
   const { theme, toggleTheme } = useThemeContext();
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <div className={clsx('app', theme)}>
+      <AuthGuard />
       <button onClick={toggleTheme}>Toggle theme</button>
       <Link to="/">Go main</Link>
       <Link to="/auth">Go auth</Link>
