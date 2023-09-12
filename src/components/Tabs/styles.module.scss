@@ -105,3 +105,9 @@
 .button.green:hover {
   background-color: var(--green-5);
 }
+
+.buttonWrapper {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
+}

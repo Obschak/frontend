@@ -1,6 +1,7 @@
 import * as TabsRadix from '@radix-ui/react-tabs';
 
 import styles from './styles.module.scss';
+import clsx from 'clsx';
 
 export const Tabs = () => (
   <TabsRadix.Root className={styles.tabsRoot} defaultValue="tab1">
@@ -33,12 +34,8 @@ export const Tabs = () => (
           defaultValue=""
         />
       </fieldset>
-      <div
-        style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-      >
-        <button className={`${styles.button} ${styles.green}`}>
-          Сохранить
-        </button>
+      <div className={styles.buttonWrapper}>
+        <button className={clsx(styles.button, styles.green)}>Сохранить</button>
       </div>
     </TabsRadix.Content>
     <TabsRadix.Content className={styles.tabsContent} value="tab2">
@@ -48,12 +45,8 @@ export const Tabs = () => (
         </label>
         <input className={styles.input} id="cardNumber" type="text" />
       </fieldset>
-      <div
-        style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-      >
-        <button className={`${styles.button} ${styles.green}`}>
-          Сохранить
-        </button>
+      <div className={styles.buttonWrapper}>
+        <button className={clsx(styles.button, styles.green)}>Сохранить</button>
       </div>
     </TabsRadix.Content>
   </TabsRadix.Root>
