@@ -10,10 +10,10 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { googleLogout } from '@react-oauth/google';
 import { logout } from '../Auth/authSlice';
 import { USER_TOKEN_KEY } from '../Auth/Auth';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const userToken = localStorage.getItem(USER_TOKEN_KEY);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { toggleTheme, theme } = useThemeContext();
 
@@ -24,11 +24,8 @@ const Profile = () => {
     googleLogout();
     localStorage.removeItem(USER_TOKEN_KEY);
     dispatch(logout());
+    navigate('/auth');
   };
-
-  if (!userToken) {
-    return <Navigate to="/auth" />;
-  }
 
   return (
     <div className={styles.profile}>

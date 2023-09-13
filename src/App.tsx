@@ -11,7 +11,7 @@ import { UserInfo } from './types/user';
 import { USER_TOKEN_KEY } from './pages/Auth/Auth';
 import { useAppDispatch } from './store/hooks';
 import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
-import { AuthGuard } from './components/AuthGuard';
+import { OnlyAuth, OnlyUnAuth } from './components/AuthGuard';
 import { CreateGroup } from './pages/CreateGroup';
 
 const App = () => {
@@ -32,13 +32,40 @@ const App = () => {
 
   return (
     <div className={clsx('app', theme)}>
-      <AuthGuard />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/" element={<Main />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/create-group" element={<CreateGroup />} />
+          <Route
+            path="/auth"
+            element={
+              <OnlyUnAuth>
+                <Auth />
+              </OnlyUnAuth>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <OnlyAuth>
+                <Main />
+              </OnlyAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <OnlyAuth>
+                <Profile />
+              </OnlyAuth>
+            }
+          />
+          <Route
+            path="/create-group"
+            element={
+              <OnlyAuth>
+                <CreateGroup />
+              </OnlyAuth>
+            }
+          />
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </Suspense>
