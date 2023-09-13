@@ -3,6 +3,7 @@ import {
   googleLogout,
   CredentialResponse,
 } from '@react-oauth/google';
+import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -10,7 +11,6 @@ import { logout, setUserInfo, setUserToken } from './authSlice';
 import { UserInfo } from '../../types/user';
 
 import styles from './styles.module.scss';
-import { Navigate } from 'react-router-dom';
 
 export const USER_TOKEN_KEY = 'user_token';
 

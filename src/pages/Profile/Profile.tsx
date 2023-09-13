@@ -1,16 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+import { googleLogout } from '@react-oauth/google';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Tabs } from '../../components/Tabs';
 import Avatar from './../../components/Avatar';
 import { useThemeContext } from '../../context/Theme';
-
+import { logout } from '../Auth/authSlice';
+import { USER_TOKEN_KEY } from '../Auth/Auth';
 import sunLogo from '../../assets/images/sun.svg';
 import moonLogo from '../../assets/images/moon.svg';
 
 import styles from './styles.module.scss';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { googleLogout } from '@react-oauth/google';
-import { logout } from '../Auth/authSlice';
-import { USER_TOKEN_KEY } from '../Auth/Auth';
-import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const navigate = useNavigate();
