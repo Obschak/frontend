@@ -15,16 +15,8 @@
   align-items: center;
 }
 
-.profileButton {
-  padding: 4px 20px 4px 20px;
-  border-radius: 4px;
-  background-color: white;
-  border: 1px solid grey;
-}
-
 .userName {
-  text-decoration: none;
-  color: black;
+  margin-bottom: 10px;
 }
 
 .tabsWrapper {
@@ -51,4 +43,16 @@
 
 .heading {
   font-size: 24px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoutButton {
+  padding: 4px 20px 4px 20px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid grey;
 }

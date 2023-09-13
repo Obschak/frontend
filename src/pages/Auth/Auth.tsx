@@ -3,6 +3,7 @@ import {
   googleLogout,
   CredentialResponse,
 } from '@react-oauth/google';
+import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -15,6 +16,8 @@ export const USER_TOKEN_KEY = 'user_token';
 
 const Auth = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const token = localStorage.getItem(USER_TOKEN_KEY);
+
   const { name, email, picture, userToken } = useAppSelector(
     ({ auth }) => auth,
   );
@@ -38,6 +41,10 @@ const Auth = (): JSX.Element => {
     localStorage.removeItem(USER_TOKEN_KEY);
     dispatch(logout());
   };
+
+  if (token) {
+    return <Navigate to="/" />;
+  }
 
   // const getUserInfo = async () => {
   //   try {
