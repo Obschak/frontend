@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import styles from './styles.module.scss';
 
-interface ToastProps {
+interface Props {
   message: string;
   openToast: boolean;
   setOpenToast: React.Dispatch<React.SetStateAction<boolean>>;
