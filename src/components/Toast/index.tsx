@@ -13,7 +13,7 @@ const Toast = ({
   message,
   openToast,
   setOpenToast,
-}: ToastProps): JSX.Element => (
+}: Props): JSX.Element => (
   <ToastRadix.Provider swipeDirection="down" duration={2000}>
     <ToastRadix.Root
       className={styles.ToastRoot}
