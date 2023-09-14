@@ -1,6 +1,7 @@
 import * as ToastRadix from '@radix-ui/react-toast';
-import styles from './styles.module.scss';
 import clsx from 'clsx';
+
+import styles from './styles.module.scss';
 
 interface ToastProps {
   message: string;
