@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
-
   height: 100%;
   box-sizing: border-box;
 }
@@ -11,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .heading {
@@ -18,10 +18,49 @@
   font-size: 24px;
 }
 
-.createButton {
+.createFirstGoup {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
+}
+
+.createButton {
+  position: fixed;
+  bottom: 10px;
+  width: calc(100% - 32px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  height: 50px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.groupWrapper {
+  height: 314px;
+  overflow-y: scroll;
+}
+
+.groupList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  height: 44px;
+}
+
+.groupList:last-child {
+  margin: 0;
+}
+
+.mainWrapper {
+  height: 100%;
+  flex-grow: 1;
 }
