@@ -9,6 +9,7 @@ import { useAppSelector } from '../../store/hooks';
 import styles from './styles.module.scss';
 
 const MainPage = () => {
+  const groups = useAppSelector((state) => state.createGroup.groups);
   const [openToast, setOpenToast] = useState(false);
   const timerRef = useRef(0);
   const { picture } = useAppSelector(({ auth }) => auth);
@@ -27,11 +28,22 @@ const MainPage = () => {
           </div>
         </Link>
       </div>
-      <Link to="/create-group" className={styles.createButton}>
-        <PlusIcon width="80" height="80" />
-        <p>Создать общак</p>
-      </Link>
-      <button
+      {groups.length === 0 && (
+        <Link to="/create-group" className={styles.createFirstGoup}>
+          <PlusIcon width="80" height="80" />
+          <p>Создать общак</p>
+        </Link>
+      )}
+      {groups.length > 0 && (
+        <div className={styles.mainWrapper}>
+          <ul className={styles.groupWrapper}>
+            {groups.map((group, index) => (
+              <li className={styles.groupList} key={index}>
+                {group}
+              </li>
+            ))}
+          </ul>
+          {/* <button
         onClick={() => {
           setOpenToast(false);
           timerRef.current = window.setTimeout(() => {
@@ -40,7 +52,12 @@ const MainPage = () => {
         }}
       >
         Show toast
-      </button>
+      </button> */}
+          <Link to="/create-group">
+            <p className={styles.createButton}>Создать</p>
+          </Link>
+        </div>
+      )}
       <Toast
         message={'Ссылка скопирована в буфер обмена!'}
         openToast={openToast}

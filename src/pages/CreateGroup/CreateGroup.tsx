@@ -1,16 +1,46 @@
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAppDispatch } from '../../store/hooks';
+import { createGroup } from './createGroupSlice';
+
 import styles from './styles.module.scss';
 
 const CreateGroup = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleClick = () => {
+    if (inputValue.trim()) {
+      dispatch(createGroup(inputValue));
+      navigate('/');
+    }
+  };
   return (
     <div className={styles.createGroup}>
-      <main className={styles.mainWrapper}>
-        <h1 className={styles.heading}>Создать общак</h1>
+      <h1 className={styles.heading}>Создать общак</h1>
+      <form className={styles.formWrapper}>
         <label className={styles.labelName} htmlFor="name">
           Название
         </label>
-        <input type="text" id="name" className={styles.input} />
-      </main>
-      <button className={styles.createButton}>Создать</button>
+        <input
+          type="text"
+          id="name"
+          name="groupName"
+          className={styles.input}
+          onChange={handleInputChange}
+          value={inputValue}
+        />
+      </form>
+      <button className={styles.createButton} onClick={handleClick}>
+        Создать
+      </button>
     </div>
   );
 };
