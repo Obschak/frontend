@@ -1,8 +1,8 @@
-import { ChangeEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { clearFormData, createGroup, getInputValue } from './createGroupSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { createGroup } from './createGroupSlice';
 
 import styles from './styles.module.scss';
 
@@ -10,18 +10,16 @@ const CreateGroup = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const form = useAppSelector((state) => state.createGroup.formData);
+  const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    dispatch(getInputValue({ fieldName: name, value }));
+    setInputValue(e.target.value);
   };
 
   const handleClick = () => {
-    if (form.groupName) {
-      dispatch(createGroup(form.groupName));
+    if (inputValue) {
+      dispatch(createGroup(inputValue));
       navigate('/');
-      dispatch(clearFormData());
     }
   };
   return (
@@ -37,7 +35,7 @@ const CreateGroup = () => {
           name="groupName"
           className={styles.input}
           onChange={handleInputChange}
-          value={form.groupName}
+          value={inputValue}
         />
       </form>
       <button className={styles.createButton} onClick={handleClick}>
