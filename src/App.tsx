@@ -13,6 +13,7 @@ import { useAppDispatch } from './store/hooks';
 import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
 import { OnlyAuth, OnlyUnAuth } from './components/AuthGuard';
 import { CreateGroup } from './pages/CreateGroup';
+import { Group } from './pages/Group';
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -63,6 +64,14 @@ const App = () => {
             element={
               <OnlyAuth>
                 <CreateGroup />
+              </OnlyAuth>
+            }
+          />
+          <Route
+            path="/group"
+            element={
+              <OnlyAuth>
+                <Group />
               </OnlyAuth>
             }
           />
