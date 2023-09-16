@@ -17,7 +17,7 @@ const CreateGroup = () => {
   };
 
   const handleClick = () => {
-    if (inputValue) {
+    if (inputValue.trim()) {
       dispatch(createGroup(inputValue));
       navigate('/');
     }
