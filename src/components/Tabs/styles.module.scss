@@ -30,12 +30,15 @@
   line-height: 1;
   color: var(--mauve-11);
   user-select: none;
+  transition: box-shadow 0.2s ease-in-out;
+  border-right: 1px solid gray;
 }
 .tabsTrigger:first-child {
   border-top-left-radius: 6px;
 }
 .tabsTrigger:last-child {
   border-top-right-radius: 6px;
+  border-right: none;
 }
 
 .tabsTrigger[data-state='active'] {
@@ -43,12 +46,13 @@
 }
 
 .tabsContent {
-  flex-grow: 1;
+  position: relative;
   padding: 20px;
   background-color: white;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   outline: none;
+  min-height: 190px;
 }
 
 .text {
@@ -75,7 +79,6 @@
 
 .input {
   border: 1px solid grey;
-  flex: 1 0 auto;
   padding: 0 10px;
   font-size: 15px;
   line-height: 1;
@@ -85,7 +88,7 @@
 }
 
 .input:focus {
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  border: 1px solid black;
 }
 
 .button {
@@ -104,12 +107,11 @@
   background-color: var(--green-4);
   color: var(--green-11);
 }
-.button.green:hover {
-  background-color: var(--green-5);
-}
 
 .buttonWrapper {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
   display: flex;
-  margin-top: 20px;
   justify-content: flex-end;
 }

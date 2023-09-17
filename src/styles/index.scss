@@ -13,7 +13,7 @@ body,
 
 .app {
   font: var(--font-m);
-
+  transition: background-color 0.4s ease-in;
   background-color: var(--bg-color);
   color: var(--primary-color);
 }

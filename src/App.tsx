@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import clsx from 'clsx';
 import jwtDecode from 'jwt-decode';
@@ -14,10 +14,13 @@ import { setUserInfo, setUserToken } from './pages/Auth/authSlice';
 import { OnlyAuth, OnlyUnAuth } from './components/AuthGuard';
 import { CreateGroup } from './pages/CreateGroup';
 import { Group } from './pages/Group';
+import { InitialOverlay } from './components/InitialOverlay';
 
 const App = () => {
   const { theme } = useThemeContext();
   const dispatch = useAppDispatch();
+
+  const [showOverlay, setShowOverlay] = useState(true);
 
   useEffect(() => {
     try {
@@ -33,51 +36,54 @@ const App = () => {
 
   return (
     <div className={clsx('app', theme)}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route
-            path="/auth"
-            element={
-              <OnlyUnAuth>
-                <Auth />
-              </OnlyUnAuth>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <OnlyAuth>
-                <Main />
-              </OnlyAuth>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <OnlyAuth>
-                <Profile />
-              </OnlyAuth>
-            }
-          />
-          <Route
-            path="/create-group"
-            element={
-              <OnlyAuth>
-                <CreateGroup />
-              </OnlyAuth>
-            }
-          />
-          <Route
-            path="/group"
-            element={
-              <OnlyAuth>
-                <Group />
-              </OnlyAuth>
-            }
-          />
-          <Route path="*" element={<div>404</div>} />
-        </Routes>
-      </Suspense>
+      {showOverlay && <InitialOverlay setShowOverlay={setShowOverlay} />}
+      {!showOverlay && (
+        <Suspense>
+          <Routes>
+            <Route
+              path="/auth"
+              element={
+                <OnlyUnAuth>
+                  <Auth />
+                </OnlyUnAuth>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <OnlyAuth>
+                  <Main />
+                </OnlyAuth>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <OnlyAuth>
+                  <Profile />
+                </OnlyAuth>
+              }
+            />
+            <Route
+              path="/create-group"
+              element={
+                <OnlyAuth>
+                  <CreateGroup />
+                </OnlyAuth>
+              }
+            />
+            <Route
+              path="/group"
+              element={
+                <OnlyAuth>
+                  <Group />
+                </OnlyAuth>
+              }
+            />
+            <Route path="*" element={<div>404</div>} />
+          </Routes>
+        </Suspense>
+      )}
     </div>
   );
 };
