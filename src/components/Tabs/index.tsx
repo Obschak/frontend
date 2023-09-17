@@ -24,17 +24,12 @@ export const Tabs = () => (
         initial="hidden"
         animate="visible"
       >
-        <motion.fieldset className={styles.fieldset}>
+        <fieldset className={styles.fieldset}>
           <label className={styles.label} htmlFor="tel">
             Номер телефона
           </label>
-          <motion.input
-            className={styles.input}
-            id="tel"
-            type="tel"
-            defaultValue=""
-          />
-        </motion.fieldset>
+          <input className={styles.input} id="tel" type="tel" defaultValue="" />
+        </fieldset>
         <fieldset className={styles.fieldset}>
           <label className={styles.label} htmlFor="bank">
             Банк

@@ -31,16 +31,17 @@
   color: var(--mauve-11);
   user-select: none;
   transition: box-shadow 0.2s ease-in-out;
+  border-right: 1px solid gray;
 }
 .tabsTrigger:first-child {
   border-top-left-radius: 6px;
 }
 .tabsTrigger:last-child {
   border-top-right-radius: 6px;
+  border-right: none;
 }
 
 .tabsTrigger[data-state='active'] {
-  scale: 0.99;
   box-shadow: inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor;
 }
 
@@ -78,7 +79,6 @@
 
 .input {
   border: 1px solid grey;
-  flex: 1 0 auto;
   padding: 0 10px;
   font-size: 15px;
   line-height: 1;

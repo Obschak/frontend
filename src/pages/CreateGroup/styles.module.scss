@@ -14,12 +14,13 @@
 }
 
 .input {
-  border: 0;
-  height: 44px;
-  border-radius: 8px;
+  border: 1px solid grey;
+  padding: 0 10px;
+  font-size: 15px;
+  line-height: 1;
+  height: 35px;
+  border-radius: 6px;
   outline: none;
-  color: black;
-  font-size: 16px;
 }
 
 .input:focus {
