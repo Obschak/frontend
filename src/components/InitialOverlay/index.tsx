@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import styles from './styles.module.scss';
@@ -10,16 +9,10 @@ interface Props {
 }
 
 export const InitialOverlay = ({ setShowOverlay }: Props) => {
-  const [initialLoad, setInitialLoad] = useState(true);
-
-  useEffect(() => {
-    setInitialLoad(false);
-  }, []);
-
   return (
     <motion.div
       className={styles.overlayWrapper}
-      initial={initialLoad ? { opacity: 1 } : { opacity: 0 }}
+      initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{
         duration: 1,
