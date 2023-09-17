@@ -14,10 +14,12 @@
 }
 
 .input {
-  border: 1px solid grey;
-  height: 40px;
-  border-radius: 10px;
+  border: 0;
+  height: 44px;
+  border-radius: 8px;
   outline: none;
+  color: black;
+  font-size: 16px;
 }
 
 .input:focus {
@@ -25,15 +27,18 @@
 }
 
 .createButton {
-  border: 1px solid grey;
-  padding: 20px;
-  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: white;
-  margin-bottom: 70px;
-}
-
-.createButton:focus {
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  color: black;
+  height: 50px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: normal;
+  font-family: 'Montserrat', sans-serif;
+  border: 0;
 }
 
 .heading {
