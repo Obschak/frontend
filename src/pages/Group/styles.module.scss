@@ -7,7 +7,7 @@
 .title {
   font-size: 18px;
   margin-right: 10px;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .groupWrappper {
@@ -63,7 +63,7 @@
 
 .balanceCount {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .debtors {
@@ -110,22 +110,27 @@
   margin-top: 10px;
   display: flex;
   flex-direction: column;
+  height: 340px;
   gap: 10px;
   overflow-y: auto;
 
   @media screen and (max-height: 800px) {
-    height: 155px;
+    height: 170px;
   }
 }
 
 .expensesItem {
   box-sizing: border-box;
   border-radius: 7px;
-  text-align: center;
+  min-height: 45px;
   width: 100%;
   padding: 10px 5px;
   background-color: #fff;
   color: #222;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .buttons {
