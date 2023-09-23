@@ -1,13 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+
 import Avatar from '../../components/Avatar';
+
 import styles from './styles.module.scss';
 
 const Group = () => {
   const navigate = useNavigate();
-
-  const handleClickNavigate = (path: string) => {
-    navigate(path);
-  };
 
   return (
     <div className={styles.group}>
@@ -81,14 +79,11 @@ const Group = () => {
           <div className={styles.buttons}>
             <button
               className={styles.btn}
-              onClick={() => handleClickNavigate('/participants')}
+              onClick={() => navigate('/participants')}
             >
               Участники
             </button>
-            <button
-              className={styles.btn}
-              onClick={() => handleClickNavigate('/events')}
-            >
+            <button className={styles.btn} onClick={() => navigate('/events')}>
               История событий
             </button>
           </div>
