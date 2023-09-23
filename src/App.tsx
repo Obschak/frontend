@@ -15,6 +15,8 @@ import { OnlyAuth, OnlyUnAuth } from './components/AuthGuard';
 import { CreateGroup } from './pages/CreateGroup';
 import { Group } from './pages/Group';
 import { InitialOverlay } from './components/InitialOverlay';
+import { Participants } from './pages/Participants';
+import { Events } from './pages/Events';
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -77,6 +79,22 @@ const App = () => {
               element={
                 <OnlyAuth>
                   <Group />
+                </OnlyAuth>
+              }
+            />
+            <Route
+              path="/participants"
+              element={
+                <OnlyAuth>
+                  <Participants />
+                </OnlyAuth>
+              }
+            />
+            <Route
+              path="/events"
+              element={
+                <OnlyAuth>
+                  <Events />
                 </OnlyAuth>
               }
             />
